@@ -14,11 +14,22 @@
 
 # You do not need to provide additional commenting above this class, just the user-defined functions within the class
 class Sensor:
-
+    
     # Must include a constructor that uses default values
     # You do not need to provide commenting above the constructor
-    def __init__(self):
-        pass
+    def __init__(self, traffic_light_colour = 'green', 
+                 pedestrian_present = 'no', 
+                 vehicle_present = 'no'
+                 ):
+        self.traffic_light_colour = traffic_light_colour
+        self.pedestrian_present = pedestrian_present
+        self.vehicle_present = vehicle_present
+
+    def __str__(self):
+        s = f'Light = {self.traffic_light_colour} , '
+        s += f'Pedestrian = {self.pedestrian_present} , '
+        s += f'Vehicle = {self.vehicle_present} .'
+        return s
 
     # Replace these comments with your function commenting
     def update_status(): # You may decide how to implement the arguments for this function
@@ -36,7 +47,10 @@ def print_message(sensor):
 # Complete the main function below
 def main():
     print("\n***ENSF 692 Car Vision Detector Processing Program***\n")
-    
+    sensor = Sensor()
+    print(sensor)
+
+
 
 
 
