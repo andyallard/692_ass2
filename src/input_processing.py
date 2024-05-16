@@ -21,29 +21,53 @@ class Sensor:
         self.traffic_light_colour = traffic_light_colour
         self.pedestrian_present = pedestrian_present
         self.vehicle_present = vehicle_present
+        self.update_action_message()
 
     def __str__(self):
-        s = f'Light = {self.traffic_light_colour} , '
+        s = f'\nLight = {self.traffic_light_colour} , '
         s += f'Pedestrian = {self.pedestrian_present} , '
         s += f'Vehicle = {self.vehicle_present} .'
         return s
 
-    # Replace these comments with your function commenting
-    def update_status(): # You may decide how to implement the arguments for this function
-        pass
+    # Receives validated inputs from user and changes the sensor status
+    def update_status(self, change_type, new_status):
+        if change_type == '1':
+            self.traffic_light_colour = new_status
+        elif change_type == '2':
+            self.pedestrian_present = new_status
+        elif change_type == '3':
+            self.vehicle_present = new_status
+        
+        # # debug. REMOVE LATER
+        # print(change_type, new_status)
 
+        self.update_action_message()
+
+    def update_action_message(self):
+        if (self.traffic_light_colour == 'red'
+                or self.pedestrian_present == 'yes'
+                or self.vehicle_present == 'yes'):
+            self.action_message = 'STOP'
+        elif self.traffic_light_colour == 'yellow':
+            self.action_message = 'Caution'
+        else:
+            self.action_message = 'Proceed'
+
+    def print_action_message(self):
+        print()
+        print(self.action_message)
 
 
 # The sensor object should be passed to this function to print the action message and current status
 # Replace these comments with your function commenting
 def print_message(sensor):
-    pass
-
+    sensor.print_action_message()
+    print(sensor)
 
 
 # Complete the main function below
 def main():
-    print("\n***ENSF 692 Car Vision Detector Processing Program***\n")
+    print("\n***ENSF 692 Car Vision Detector Processing Program***")
     sensor = Sensor()
     print(sensor)
 
@@ -93,8 +117,9 @@ def main():
             print('Invalid vision change.')
             continue
 
-
-        print('*' * 30, 'MORE STUFF ONLY SEEN IF NO ERROR')
+        # Handle valid user input by updating status and issuing an action message
+        sensor.update_status(user_menu_response, user_change_response)
+        print_message(sensor)
     
     print('\n***Thank you for using the Car Vision Detector Processing Program***')
 
