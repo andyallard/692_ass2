@@ -12,11 +12,8 @@
 # No global variables are permitted
 
 
-# You do not need to provide additional commenting above this class, just the user-defined functions within the class
 class Sensor:
     
-    # Must include a constructor that uses default values
-    # You do not need to provide commenting above the constructor
     def __init__(self, traffic_light_colour = 'green', 
                  pedestrian_present = 'no', 
                  vehicle_present = 'no'
@@ -49,6 +46,26 @@ def main():
     print("\n***ENSF 692 Car Vision Detector Processing Program***\n")
     sensor = Sensor()
     print(sensor)
+
+    valid_menu_inputs = ['0', '1', '2', '3']
+    user_menu_response = ''
+
+    while user_menu_response != '0':
+        # Prompt user and collect response
+        print('\nAre changes detected in the vision output?')
+        
+        print('Select 1 for traffic light, 2 for pedestrian, '
+              '3 for vehicle, or 0 to end the program: ', end='')
+        user_menu_response = input()
+
+        # Validate user input
+        try:
+            if user_menu_response not in valid_menu_inputs:
+                raise ValueError('Invalid menu entry.')
+        except ValueError as err:
+            print('You must select 1, 2, 3, or 0.')
+    
+    print('\n***Thank you for using the Car Vision Detector Processing Program***')
 
 
 
