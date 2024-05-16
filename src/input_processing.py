@@ -48,22 +48,53 @@ def main():
     print(sensor)
 
     valid_menu_inputs = ['0', '1', '2', '3']
+    valid_change_inputs = {
+        '1': ['green', 'yellow', 'red'],
+        '2': ['yes', 'no'],
+        '3': ['yes', 'no']
+    }
     user_menu_response = ''
+    user_change_response = ''
 
-    while user_menu_response != '0':
+    while True:
         # Prompt user and collect response
         print('\nAre changes detected in the vision output?')
-        
         print('Select 1 for traffic light, 2 for pedestrian, '
               '3 for vehicle, or 0 to end the program: ', end='')
         user_menu_response = input()
 
-        # Validate user input
+        # debugging... REMOVE LATER!
+        # print('user_menu_response', user_menu_response, type(user_menu_response))
+
+        # Validate user input for first question
         try:
             if user_menu_response not in valid_menu_inputs:
                 raise ValueError('Invalid menu entry.')
         except ValueError as err:
             print('You must select 1, 2, 3, or 0.')
+            continue
+
+        # Exit program if user enters '0'
+        if user_menu_response == '0':
+            break
+
+        # Ask second question
+        user_change_response = input('What change has been identified? : ')
+        
+        # Validate user input for second question
+
+        # debugging... REMOVE LATER!
+        # print('valid change inputs', valid_change_inputs[user_menu_response])
+
+        try:
+            if user_change_response not in valid_change_inputs[user_menu_response]:
+                raise ValueError('Invalid menu entry.')
+        except ValueError as err:
+            print('Invalid vision change.')
+            continue
+
+
+        print('*' * 30, 'MORE STUFF ONLY SEEN IF NO ERROR')
     
     print('\n***Thank you for using the Car Vision Detector Processing Program***')
 
